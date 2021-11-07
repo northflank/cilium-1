@@ -1154,7 +1154,7 @@ static __always_inline bool snat_v4_needed(struct __ctx_buff *ctx, __be32 *addr,
 		 *    IPV4_SNAT_EXCLUSION_DST_CIDR check.
 		 */
 		if (!ep || info->sec_label != REMOTE_NODE_ID) {
-			struct egress_info *einfo;
+			struct egress_policy_entry *einfo;
 
 			/* Check if SNAT needs to be applied to the packet.
 			 * Apply SNAT if there is an egress rule in ebpf map,
@@ -1906,7 +1906,7 @@ static __always_inline int rev_nodeport_lb4(struct __ctx_buff *ctx, int *ifindex
 	 * via the tunnel.
 	 */
 	{
-		struct egress_info *einfo;
+		struct egress_policy_entry *einfo;
 
 		einfo = lookup_ip4_egress_endpoint(ip4->daddr, ip4->saddr);
 		if (einfo) {

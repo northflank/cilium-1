@@ -300,7 +300,7 @@ func (d *Daemon) initMaps() error {
 		return err
 	}
 
-	if _, err := egressmap.EgressMap.OpenOrCreate(); err != nil {
+	if err := egressmap.InitEgressMaps(); err != nil {
 		return err
 	}
 

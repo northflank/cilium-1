@@ -64,7 +64,7 @@ lookup_ip4_endpoint_policy_map(__u32 ip)
 
 /* EGRESS_STATIC_PREFIX gets sizeof non-IP, non-prefix part of ipcache_key */
 #define EGRESS_STATIC_PREFIX							\
-	(8 * (sizeof(struct egress_key) - sizeof(struct bpf_lpm_trie_key)	\
+	(8 * (sizeof(struct egress_policy_key) - sizeof(struct bpf_lpm_trie_key)	\
 	      - 4))
 #define EGRESS_PREFIX_LEN(PREFIX) (EGRESS_STATIC_PREFIX + (PREFIX))
 #define EGRESS_IPV4_PREFIX EGRESS_PREFIX_LEN(32)
@@ -139,10 +139,10 @@ LPM_LOOKUP_FN(lookup_ip4_remote_endpoint, __be32, IPCACHE4_PREFIXES,
 #endif /* HAVE_LPM_TRIE_MAP_TYPE */
 
 #ifdef ENABLE_EGRESS_GATEWAY
-static __always_inline __maybe_unused struct egress_info *
+static __always_inline __maybe_unused struct egress_policy_entry *
 egress_lookup4(const void *map, __be32 sip, __be32 dip)
 {
-	struct egress_key key = {
+	struct egress_policy_key key = {
 		.lpm_key = { EGRESS_IPV4_PREFIX, {} },
 		.sip = sip,
 		.dip = dip,

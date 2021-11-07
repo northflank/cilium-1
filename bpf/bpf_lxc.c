@@ -794,7 +794,7 @@ ct_recreate4:
 
 #ifdef ENABLE_EGRESS_GATEWAY
 	{
-		struct egress_info *info;
+		struct egress_policy_entry *info;
 		struct endpoint_key key = {};
 
 		/* If tunnel endpoint is found in ipcache, it means the remote endpoint is
