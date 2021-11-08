@@ -442,7 +442,7 @@ func NewDaemon(ctx context.Context, cancel context.CancelFunc, epMgr *endpointma
 		}
 	}
 
-	d.egressGatewayManager = egressgateway.NewEgressGatewayManager()
+	d.egressGatewayManager = egressgateway.NewEgressGatewayManager(&d)
 
 	d.k8sWatcher = watchers.NewK8sWatcher(
 		d.endpointManager,
