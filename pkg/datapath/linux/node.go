@@ -668,7 +668,7 @@ type NextHop struct {
 }
 
 func (n *linuxNodeHandler) insertNeighborCommon(scopedLog *logrus.Entry, ctx context.Context, nextHop NextHop, link netlink.Link, refresh bool) {
-	if refresh {
+	if refresh && !nextHop.IsNew {
 		if lastPing, found := n.neighLastPingByNextHop[nextHop.Name]; found &&
 			time.Now().Sub(lastPing) < option.Config.ARPPingRefreshPeriod {
 			// Last ping was issued less than option.Config.ARPPingRefreshPeriod
